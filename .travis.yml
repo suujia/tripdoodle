@@ -4,7 +4,6 @@ node_js:
 sudo: false
 cache:
  directories:
-  - $HOME/Library/Caches/Homebrew
   - node_modules
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
@@ -14,14 +13,13 @@ install:
   - npm install -g codecov
   - npm install lint
 script:
- - yarn run test
+ - npm run test
  - codecov
  - npm run lint
  - npm test
 
 matrix:
   include:
-  # testing golang backend
     - language: go
       go: 
        - master
@@ -37,7 +35,6 @@ matrix:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
       sudo: required
-      node_js: false
       cache:
         directories:
           - $HOME/.yarn-cache
@@ -52,11 +49,8 @@ matrix:
           - extra-google-m2repository
           - extra-android-m2repository
           - addon-google_apis-google-16
-      before_install:
-        - nvm install 7
       script: 
-          - npm run android
-          - exp build:android
+          - npm start android
           - cd android && ./gradlew assembleDebug && ./gradlew assembleRelease
 
     - language: objective-c
@@ -65,23 +59,15 @@ matrix:
       xcode_sdk: iphonesimulator9.0
       node_js: false
       cache:
-        bundler: true
-        cocoapods: true
-        yarn: true
-        directories:
-         - $HOME/Library/Caches/Homebrew
-      before_install:
-        - nvm install 7
-        install:
-        - travis_retry gem install xcpretty
-      before_script:
-        - nvm install 8
-        - sudo easy_install virtualenv
-        - virtualenv ~/virtualenv
-        - source ~/virtualenv/bin/activate
+       directories:
+        - bundler: true
+        - cocoapods: true
+        - yarn: true
+        - $HOME/Library/Caches/Homebrew
+      install:
+        - gem install xcpretty
       script:
-          - npm run ios
-          - exp build:ios
+          - npm start ios
         
 notifications:
   email: false
