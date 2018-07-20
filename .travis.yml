@@ -1,0 +1,15 @@
+language: go
+sudo: false
+cache:
+ directories:
+  - node_modules
+go: 
+  - master
+script: 
+  - go test ./main.go
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email: false
+  
