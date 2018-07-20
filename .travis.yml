@@ -1,6 +1,23 @@
+language: node_js
+node_js:
+ - 9.11.1
+sudo: false
+cache:
+ directories:
+  - $HOME/Library/Caches/Homebrew
+  - node_modules
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
+install:
+  - npm install
+  - npm install -g codecov
+  - npm install lint
+script:
+ - yarn run test
+ - codecov
+ - npm run lint
+ - npm test
 
 matrix:
   include:
@@ -8,26 +25,19 @@ matrix:
     - language: go
       go: 
        - master
-      script: go test ./main.go
-
-    - language: node_js
-      node_js:
-        - 9.11.1
-      cache:
-       directories:
-         - node_modules
-      script:
-          - yarn run test && codecov
-          - npm run lint
-          - npm test
-          - npm run build
+      script: 
+       - go test ./main.go
+      after_success:
+       - bash <(curl -s https://codecov.io/bash)
 
     - language: android
-      sudo: required
+      os: linux
       jdk: oraclejdk8
       before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
+      sudo: required
+      node_js: false
       cache:
         directories:
           - $HOME/.yarn-cache
@@ -35,30 +45,39 @@ matrix:
           - $HOME/.gradle/wrapper/
       android:
         components:
-          - build-tools-23.0.1
-          - android-23
-          - extra-android-m2repository
-          - extra-google-google_play_services
+          - tools
+          - platform-tools
+          - build-tools-26.0.1
+          - android-26
           - extra-google-m2repository
+          - extra-android-m2repository
           - addon-google_apis-google-16
-      script: npm run android
+      script: 
+          - npm run android
+          - exp build:android
+          - cd android && ./gradlew assembleDebug && ./gradlew assembleRelease
 
     - language: objective-c
+      os: osx
       osx_image: xcode9.4
       xcode_sdk: iphonesimulator9.0
-      node_js: 8
+      node_js: false
       cache:
         bundler: true
         cocoapods: true
         yarn: true
         directories:
          - $HOME/Library/Caches/Homebrew
+        install:
+        - travis_retry gem install xcpretty
       before_script:
         - nvm install 8
         - sudo easy_install virtualenv
         - virtualenv ~/virtualenv
         - source ~/virtualenv/bin/activate
-      script: npm run ios
+      script:
+          - npm run ios
+          - exp build:ios
         
 notifications:
   email: false
