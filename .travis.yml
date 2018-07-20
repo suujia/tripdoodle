@@ -1,26 +1,8 @@
-language: node_js
-node_js:
- - 9.11.1
 sudo: false
 cache:
  directories:
   - node_modules
-before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH="$HOME/.yarn/bin:$PATH"
-  - curl -s -o $HOME/.nvm/nvm.sh https://raw.githubusercontent.com/creationix/nvm/v0.33.8/nvm.sh | bash
-  - export NVM_DIR=~/.nvm
-  - source $HOME/.nvm/nvm.sh
-install:
-  - npm install
-  - npm install -g codecov
-  - npm install lint
-script:
- - npm run test
- - codecov
- - npm run lint
- - npm test
-
+  
 matrix:
   include:
     - language: go
@@ -31,18 +13,32 @@ matrix:
       after_success:
        - bash <(curl -s https://codecov.io/bash)
 
+    - language: node_js
+      node_js:
+        - 9.11.1
+     before_install:
+       - curl -o- -L https://yarnpkg.com/install.sh | bash
+       - export PATH="$HOME/.yarn/bin:$PATH"
+     # - curl -s -o $HOME/.nvm/nvm.sh https://raw.githubusercontent.com/creationix/nvm/v0.33.8/nvm.sh | bash
+     # - export NVM_DIR=~/.nvm
+     # - source $HOME/.nvm/nvm.sh
+     install:
+       - npm install
+       - npm install -g codecov
+       - npm install lint
+     script:
+      - npm run test
+      - codecov
+      - npm run lint
+      - npm test
+     
     - language: android
       os: linux
       jdk: oraclejdk8
-      before_cache:
-        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-        - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
       sudo: required
       cache:
         directories:
           - $HOME/.yarn-cache
-          - $HOME/.gradle/caches/
-          - $HOME/.gradle/wrapper/
       before_install: 
           - nvm install 8.9.4
           - node --version
@@ -55,9 +51,9 @@ matrix:
           - extra-google-m2repository
           - extra-android-m2repository
           - addon-google_apis-google-16
-      script: 
-          - npm start android
-          - cd android && ./gradlew assembleDebug && ./gradlew assembleRelease
+    #make some android tests
+    #  script: 
+    #      - npm start android
 
     - language: objective-c
       os: osx
@@ -75,8 +71,10 @@ matrix:
         - node --version
       install:
         - gem install xcpretty
-      script:
-          - npm start ios
+        
+     #make some ios tests
+     # script:
+     #     - npm start ios
         
 notifications:
   email: false
