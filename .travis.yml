@@ -52,6 +52,8 @@ matrix:
           - extra-google-m2repository
           - extra-android-m2repository
           - addon-google_apis-google-16
+      before_install:
+        - nvm install 7
       script: 
           - npm run android
           - exp build:android
@@ -68,6 +70,8 @@ matrix:
         yarn: true
         directories:
          - $HOME/Library/Caches/Homebrew
+      before_install:
+        - nvm install 7
         install:
         - travis_retry gem install xcpretty
       before_script:
