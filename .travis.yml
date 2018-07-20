@@ -16,18 +16,11 @@ matrix:
       cache:
        directories:
          - node_modules
-      install:
-          - git fetch --unshallow --all
-          - yarn global add codecov
-          - yarn
       script:
-          - cp env.example.js env.js
+          - yarn run test && codecov
           - npm run lint
           - npm test
-          - npm run bundle:ios
-          
-      script:
-         - yarn run test && codecov
+          - npm run build
 
     - language: android
       sudo: required
@@ -51,13 +44,15 @@ matrix:
       script: npm run android
 
     - language: objective-c
-      os: osx
-      osx_image: xcode9.3
+      osx_image: xcode9.4
+      xcode_sdk: iphonesimulator9.0
       node_js: 8
       cache:
-        - bundler
-        - pip
-        - yarn
+        bundler: true
+        cocoapods: true
+        yarn: true
+        directories:
+         - $HOME/Library/Caches/Homebrew
       before_script:
         - nvm install 8
         - sudo easy_install virtualenv
