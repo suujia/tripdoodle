@@ -1,10 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-import { List, ListItem, Text, Avatar } from 'react-native-elements';
+import { List, ListItem, Avatar } from 'react-native-elements';
+import { StackNavigator } from 'react-navigation';
 
 export default class Event extends React.Component {
+  static navigationOptions = {
+    title: 'Event',
+  };
   render() {
+    const { state, navigate } = this.props.navigation;
+    console.log("this.props.navigation.state = " + util.inspect(this.props.navigation.state, false, null));
     const list = [
         {
           name: 'Campsite details',
@@ -22,7 +28,9 @@ export default class Event extends React.Component {
       <View style={styles.container}>
         <Text>cultus lake event</Text>
 
-        <Avatar
+        <Text>Params from home page: eventId = {params.id}, event = {params.name}, event_url = {params.event_url}, desc = {params.subtitle}</Text>
+
+        {/* <Avatar
         small
         rounded
         source={{uri: "Susie.jpg"}}
@@ -36,10 +44,28 @@ export default class Event extends React.Component {
         source={{uri: "Dylan.jpg"}}
         onPress={() => navigate('Profile', { name: 'Dylan'})}
         activeOpacity={0.7}
-        />
+        /> */}
 
+        <Button
+        raised
+        color={ 'blue' }
+        icon={{name: 'cached'}}
+        onPress={() => this.props.navigation.goBack()}
+        title='Back'/>
 
-        <List>
+        <TouchableHighlight
+            onPress={() => navigate("Todo", { screen: "Todo" })}
+            style={[styles.button, {backgroundColor: '#8E84FB'}]}>
+            <Text style={styles.buttonText}>Todo</Text>
+        </TouchableHighlight>
+
+        <Button
+        raised
+        icon={{name: 'cached'}}
+        onPress={() => navigate('Todo')}
+        title='Todo' />
+
+        {/* <List>
         {
             list.map((item, i) => (
             <ListItem
@@ -49,7 +75,7 @@ export default class Event extends React.Component {
             />
             ))
         }
-        </List>
+        </List> */}
 
         </View>
 
