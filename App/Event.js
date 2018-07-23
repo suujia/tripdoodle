@@ -2,9 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { List, ListItem, Text, Avatar } from 'react-native-elements';
+import { StackNavigator } from 'react-navigation';
 
 export default class Event extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: `Event: ${navigation.state.params.screen}`,
+    }
+  };
   render() {
+    const { state, navigate } = this.props.navigation;
     const list = [
         {
           name: 'Campsite details',
@@ -38,6 +45,18 @@ export default class Event extends React.Component {
         activeOpacity={0.7}
         />
 
+        <Button
+        raised
+        color={ 'blue' }
+        icon={{name: 'cached'}}
+        onPress={() => this.props.navigation.goBack()}
+        title='Back'/>
+
+        <TouchableHighlight
+            onPress={() => navigate("Profile", { screen: "Profile" })}
+            style={[styles.button, {backgroundColor: '#8E84FB'}]}>
+            <Text style={styles.buttonText}>Profile</Text>
+        </TouchableHighlight>
 
         <List>
         {

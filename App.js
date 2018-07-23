@@ -1,8 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Text, Button } from 'react-native-elements';
+import { StackNavigator } from 'react-navigation';
 
 export default class App extends React.Component {
+    static navigationOptions = {
+    title: 'Welcome',
+  };
   render() {
     const list = [
       {
@@ -47,19 +51,37 @@ export default class App extends React.Component {
         <Button
         raised
         icon={{name: 'cached'}}
-        onPress={() => console.log("Works!")}
-        title='BUTTON ONE' />
+        onPress={() => navigate('Event')}
+        title='Event' />
 
         <Button
         raised
         color={ 'blue' }
         icon={{name: 'cached'}}
-        onPress={() => console.log("Works!")}
+        onPress={() => navigate('Map')}
         title='BUTTON TWO' />
+
+        <Button
+        raised
+        color={ 'blue' }
+        icon={{name: 'cached'}}
+        onPress={() => navigate('Profile')}
+        title='Profile' />
+
       </View>
     );
   }
 }
+
+// make a proper menu
+// www.codementor.io/blessingoraz/understanding-navigation-in-react-native-a3wlcxmzu
+const Menu = StackNavigator({
+  Home: { screen: App },
+  Event: { screen: Event },
+  Map: { screen: Map },
+  Profile: { screen: Profile },
+
+});
 
 const styles = StyleSheet.create({
   container: {
