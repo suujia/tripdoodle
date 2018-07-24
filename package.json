@@ -9,11 +9,11 @@
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "start": "react-native-scripts start",
+    "start": "react-native-scripts start node_modules/react-native/packager/packager.sh",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "jest"
+    "test": "jest --maxWorkers=4"
   },
   "jest": {
     "preset": "jest-expo"
