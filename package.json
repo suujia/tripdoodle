@@ -13,6 +13,7 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
+    "ci": "echo hello world, this is a stub",
     "test": "jest --maxWorkers=4"
   },
   "jest": {
