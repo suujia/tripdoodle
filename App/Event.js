@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-import { List, ListItem, Text, Avatar } from 'react-native-elements';
+import { List, ListItem, Avatar } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
 
 export default class Event extends React.Component {
