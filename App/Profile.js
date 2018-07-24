@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Text, Avatar } from 'react-native-elements';
+import { Avatar } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
 
 export default class Profile extends React.Component {
   static navigationOptions = {
-    title: 'Profile',
+    title: 'ProfileScreen',
   };
   render() {
     const { navigate } = this.props.navigation

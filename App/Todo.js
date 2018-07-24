@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import { Text, Button } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
 
 export default class Todo extends React.Component {
     static navigationOptions = {
-    title: 'Todo',
+    title: 'TodoScreen',
   };
   render() {
+    var { navigate } = this.props.navigation;
       // https://facebook.github.io/react-native/docs/using-a-listview  fix these lists
     const list = [
       {

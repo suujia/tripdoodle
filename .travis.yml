@@ -1,15 +1,72 @@
-language: go
 sudo: false
 cache:
- directories:
-  - node_modules
-go: 
-  - master
-script: 
-  - go test ./main.go
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  directories:
+    - node_modules
+
+matrix:
+  include:
+    - language: go
+      go:
+      - master
+      script:
+      - go test ./main.go
+      after_success:
+      - bash <(curl -s https://codecov.io/bash)
+
+    - language: node_js
+      cache:
+        yarn: true
+      node_js:
+      - '10.7'
+      before_install: 
+      - npm install
+      script:
+      - npm test
+      - npm run lint
+      - npn run coverage
+      # env:
+      # - NODE_ENV: feature/travis
+    
+    - language: android
+      sudo: required
+      before_install:
+      - nvm install 10.7
+      - node --version
+      install:
+      - npm install
+      - touch .watchmanconfig
+      android:
+        components:
+        - build-tools-23.0.1
+        - android-23
+        - extra-android-m2repository
+        - extra-google-google_play_services
+        - extra-google-m2repository
+        - addon-google_apis-google-16
+      script:
+      - git init
+      - npm run ci
+      - npm run android
+
+    - language: objective-c
+      sudo: required
+      osx_image: xcode9.2
+      xcode_sdk: iphonesimulator9.0
+      before_install:
+        - export NVM_DIR=~/.nvm
+        - which nvm || curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+        - nvm install 10.7
+        - node --version
+        - brew update
+        - npm install
+        - gem install xcpretty
+        - gem install cocoapods
+      install:
+      - touch .watchmanconfig
+      script:
+      - git init
+      - npm run ci
+      - npm run ios
 
 notifications:
   email: false
-  

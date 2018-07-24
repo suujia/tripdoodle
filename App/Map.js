@@ -4,7 +4,7 @@ import { StackNavigator } from 'react-navigation';
 
 export default class Map extends React.Component {
   static navigationOptions = {
-    title: 'Map',
+    title: 'MapScreen',
   };
   render() {
     const { navigate } = this.props.navigation
