@@ -7,16 +7,20 @@ import (
 )
 
 func main() {
-
 	type todo struct {
 		// set as true when edit or add button is pressed
 		EnableEdit bool   `false`
 		Id         string `json:"id"`
 		Title      string `json:"title"`
 		Completed  bool   `json:"completed"`
+		Action     string `ADD`
 	}
 
 	http.HandleFunc("/", handle)
+	http.HandleFunc("/", renderList)
+	http.HandleFunc("/", addTodo)
+	http.HandleFunc("/", deleteTodo)
+	http.HandleFunc("/", editTodo)
 }
 
 // takes input event, then renders the list associated to event
@@ -34,10 +38,11 @@ func renderList() {
 // press button: edit, delete, add, complete
 // get request is just rendered automatically
 func handle(response http.ResponseWriter, request *http.Request) {
-	switch response.Method {
+	// s := todo{EnableEdit: false, Id: "123", Title: "Cultus Lake", Completed: false, Action: "ADD"}
+	switch request.Method {
 	case "ADD":
-		if this.enableEdit == true {
-			response, err = http.Put("https://httpbin.org/put", todoIndex, this.todo)
+		if this.EnableEdit == true {
+			response, _ = http.Put("https://httpbin.org/put", todoIndex, this.todo)
 			if err != nil {
 				fmt.Printf("HTTP request failed with error %s\n", err)
 			} else {
