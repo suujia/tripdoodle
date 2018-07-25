@@ -21,6 +21,7 @@ matrix:
       script:
       - npm test
       - npm run lint
+      - npn run coverage
       # env:
       # - NODE_ENV: feature/travis
     
@@ -30,6 +31,7 @@ matrix:
       - node --version
       install:
       - npm install
+      - touch .watchmanconfig
       android:
         components:
         - build-tools-23.0.1
@@ -39,6 +41,7 @@ matrix:
         - extra-google-m2repository
         - addon-google_apis-google-16
       script:
+      - git init
       - npm run ci
       - npm run android
 
@@ -54,7 +57,10 @@ matrix:
         - npm install
         - gem install xcpretty
         - gem install cocoapods
+      install:
+      - touch .watchmanconfig
       script:
+      - git init
       - npm run ci
       - npm run ios
 

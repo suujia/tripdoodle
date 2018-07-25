@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "eslint": "^3.17.1",
+    "eslint": "^5.0.0",
     "eslint-plugin-react": "^7.8.2",
     "eslint-plugin-react-native": "^3.2.1",
     "react-native-scripts": "1.14.0",
@@ -17,6 +17,7 @@
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "ci": "echo hello world, this is a stub",
+    "coverage": "jest --coverage",
     "test": "jest --maxWorkers=4",
     "test:coverage": "jest --coverage",
     "lint": "eslint"
