@@ -17,7 +17,7 @@ matrix:
       cache:
         yarn: true
       node_js:
-      - '8.4'
+      - '10.7'
       script:
       - npm test
       - npm run lint
@@ -28,10 +28,8 @@ matrix:
     - language: android
       sudo: required
       before_install:
-      - nvm install 9
+      - nvm install 10.7
       - node --version
-      - sudo sysctl -w fs.inotify.max_user_instances=1024
-      - sudo sysctl -w fs.inotify.max_user_watches=12288
       install:
       - npm install
       - touch .watchmanconfig
@@ -55,14 +53,14 @@ matrix:
       before_install:
         - export NVM_DIR=~/.nvm
         - which nvm || curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-        - nvm install 8.9.4
+        - nvm install 10.7
         - node --version
         - brew update
         - npm install
         - gem install xcpretty
         - gem install cocoapods
-        - sudo sysctl -w fs.inotify.max_user_instances=1024
-        - sudo sysctl -w fs.inotify.max_user_watches=12288
+        - sysctl -w fs.inotify.max_user_instances=1024
+        - sysctl -w fs.inotify.max_user_watches=12288
       install:
       - touch .watchmanconfig
       script:
