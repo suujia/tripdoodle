@@ -26,9 +26,12 @@ matrix:
       # - NODE_ENV: feature/travis
     
     - language: android
+      sudo: required
       before_install:
       - nvm install 9
       - node --version
+      - sudo sysctl -w fs.inotify.max_user_instances=1024
+      - sudo sysctl -w fs.inotify.max_user_watches=12288
       install:
       - npm install
       - touch .watchmanconfig
@@ -46,6 +49,7 @@ matrix:
       - npm run android
 
     - language: objective-c
+      sudo: required
       osx_image: xcode9.2
       xcode_sdk: iphonesimulator9.0
       before_install:
@@ -57,6 +61,8 @@ matrix:
         - npm install
         - gem install xcpretty
         - gem install cocoapods
+        - sudo sysctl -w fs.inotify.max_user_instances=1024
+        - sudo sysctl -w fs.inotify.max_user_watches=12288
       install:
       - touch .watchmanconfig
       script:
