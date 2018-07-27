@@ -2,12 +2,28 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
+const util = require('util');
+
+
+const NavigationApp = StackNavigator({
+  Home: { screen: Home },
+  Event: { screen: Event },
+  Todo: { screen: Todo },
+}, {
+  navigationOptions: {
+    headerStyle: {
+      marginTop: Expo.Constants.statusBarHeight
+    }
+  }
+});
 
 export default class App extends React.Component {
     static navigationOptions = {
-    title: 'Welcome',
+    title: 'HomeScreen',
   };
+  
   render() {
+    var { navigate } = this.props.navigation;
     const list = [
       {
         name: 'Las Vegas',
@@ -30,6 +46,7 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <Text>welcome to tripdoodle</Text>
 
+        <NavigationApp/>; 
         <ScrollView
           horizontal
           pagingEnabled // swiping gestures 
@@ -51,7 +68,7 @@ export default class App extends React.Component {
         <Button
         raised
         icon={{name: 'cached'}}
-        onPress={() => navigate('Event')}
+        onPress={() => navigate('Event', {eventId: this.eventId, name: this.name, event_url: this.event_url, desc:this.desc})}
         title='Event' />
 
         <Button

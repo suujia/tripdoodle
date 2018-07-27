@@ -8,6 +8,7 @@ export default class Todo extends React.Component {
     title: 'Todo',
   };
   render() {
+    var { navigate } = this.props.navigation;
       // https://facebook.github.io/react-native/docs/using-a-listview  fix these lists
     const list = [
       {

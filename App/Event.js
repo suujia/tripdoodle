@@ -5,13 +5,12 @@ import { List, ListItem, Avatar } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
 
 export default class Event extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: `Event: ${navigation.state.params.screen}`,
-    }
+  static navigationOptions = {
+    title: 'Event',
   };
   render() {
     const { state, navigate } = this.props.navigation;
+    console.log("this.props.navigation.state = " + util.inspect(this.props.navigation.state, false, null));
     const list = [
         {
           name: 'Campsite details',
@@ -28,6 +27,8 @@ export default class Event extends React.Component {
     return (
       <View style={styles.container}>
         <Text>cultus lake event</Text>
+
+        <Text>Params from home page: eventId = {params.id}, event = {params.name}, event_url = {params.event_url}, desc = {params.subtitle}</Text>
 
         <Avatar
         small
