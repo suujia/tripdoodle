@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import { Text, Button } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
 
 export default class App extends React.Component {
