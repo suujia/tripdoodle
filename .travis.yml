@@ -18,6 +18,8 @@ matrix:
         yarn: true
       node_js:
       - '10.7'
+      before_install: 
+      - npm install
       script:
       - npm test
       - npm run lint
@@ -59,8 +61,6 @@ matrix:
         - npm install
         - gem install xcpretty
         - gem install cocoapods
-        - sysctl -w fs.inotify.max_user_instances=1024
-        - sysctl -w fs.inotify.max_user_watches=12288
       install:
       - touch .watchmanconfig
       script:
