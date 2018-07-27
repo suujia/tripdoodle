@@ -4,52 +4,49 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 )
 
+type todo struct {
+	// set as true when edit or add button is pressed
+	EnableEdit bool   `false`
+	Id         string `json:"id"`
+	Title      string `json:"title"`
+	Completed  bool   `json:"completed"`
+	Action     string `ADD`
+}
+
 func main() {
-	type todo struct {
-		// set as true when edit or add button is pressed
-		EnableEdit bool   `false`
-		Id         string `json:"id"`
-		Title      string `json:"title"`
-		Completed  bool   `json:"completed"`
-		Action     string `ADD`
-	}
-
+	do := &todo{EnableEdit: false, Id: "123", Title: "Cultus Lake", Completed: false, Action: "ADD"}
 	http.HandleFunc("/", handle)
-	http.HandleFunc("/", renderList)
-	http.HandleFunc("/", addTodo)
-	http.HandleFunc("/", deleteTodo)
-	http.HandleFunc("/", editTodo)
+	http.ListenAndServe(":8080", nil)
 }
 
-// takes input event, then renders the list associated to event
-// pass it to javascript to print out line by line
-func renderList() {
-	response, err := http.Get("https://api.coinbase.com/v2/prices/BTC-USD/buy")
-	if err != nil {
-		fmt.Printf("HTTP request failed with error %s\n", err)
-	} else {
-		data, _ := ioutil.ReadAll(response.Body)
-		fmt.Println(string(data))
-	}
-}
-
-// press button: edit, delete, add, complete
-// get request is just rendered automatically
 func handle(response http.ResponseWriter, request *http.Request) {
-	// s := todo{EnableEdit: false, Id: "123", Title: "Cultus Lake", Completed: false, Action: "ADD"}
 	switch request.Method {
+	case "GET":
+		response, err := http.Get("https://api.coinbase.com/v2/prices/BTC-USD/buy")
+		if err != nil {
+			fmt.Printf("HTTP request failed with error %s\n", err)
+		} else {
+			data, err := ioutil.ReadAll(response.Body)
+			response.WriteHeader(http.StatusOK)
+			fmt.Println(string(data))
+		}
 	case "ADD":
-		if this.EnableEdit == true {
-			response, _ = http.Put("https://httpbin.org/put", todoIndex, this.todo)
+		if do.EnableEdit == true {
+			response, err = http.Put("https://httpbin.org/put", todoIndex, this.todo)
 			if err != nil {
 				fmt.Printf("HTTP request failed with error %s\n", err)
 			} else {
+				err := request.ParseForm()
+
 				this.todos[this.jsonData.todoIndex] = this.todo
 				this.enableEdit = false
-				data, _ := ioutil.ReadAll(response.Body)
-				fmt.Println(string(data))
+				data, err := ioutil.ReadAll(response.Body)
+				response.Header().Set("Content-Type", "text/html")
+				w.WriteHeader(http.StatusOK)
+				fmt.Printf(response, string(data))
 			}
 		}
 	case "DELETE":
@@ -59,19 +56,26 @@ func handle(response http.ResponseWriter, request *http.Request) {
 			if err != nil {
 				fmt.Printf("HTTP request failed with error %s\n", err)
 			} else {
-				fmt.Println("you're deleting this todo")
 				// this.http.Delete(todo).then(response => {
 				//     if(response.status == 200){
 				//         this.todos.splice(todoIndex, 1)
-				//         this.todo = {id: '', title: '', completed: false}
 				// }
-				// }
+				response.WriteHeader(http.StatusOK)
+				fmt.Println("you're deleting this todo")
 			}
 		}
-	case "EDIT":
+	case "POST":
+		resp, err := http.PostForm("https://httpbin.org/form",
+			url.Values{"key": {"Value"}, "id": {"123"}})
+		w.WriteHeader(http.StatusOK)
 		fmt.Println("you're editing this todo")
 
-	case "COMPLETE":
+	case "PATCH":
+		w.WriteHeader(http.StatusOK)
 		fmt.Println("todo completed!")
+
+	default:
+		response.WriteHeader(http.StatusInternalServerError)
+		response.Write("unrecognized request")
 	}
 }
