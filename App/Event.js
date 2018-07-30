@@ -6,7 +6,7 @@ import { StackNavigator } from 'react-navigation';
 
 export default class Event extends React.Component {
   static navigationOptions = {
-    title: 'Event',
+    title: 'EventScreen',
   };
   render() {
     const { state, navigate } = this.props.navigation;

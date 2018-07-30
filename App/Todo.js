@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 
 export default class Todo extends React.Component {
     static navigationOptions = {
-    title: 'Todo',
+    title: 'TodoScreen',
   };
   render() {
     var { navigate } = this.props.navigation;

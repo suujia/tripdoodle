@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 
 export default class Profile extends React.Component {
   static navigationOptions = {
-    title: 'Profile',
+    title: 'ProfileScreen',
   };
   render() {
     const { navigate } = this.props.navigation
