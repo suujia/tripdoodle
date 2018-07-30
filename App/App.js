@@ -5,17 +5,17 @@ import { StackNavigator } from 'react-navigation';
 const util = require('util');
 
 
-const NavigationApp = StackNavigator({
-  Home: { screen: App },
-  Event: { screen: Event },
-  Todo: { screen: Todo },
-}, {
-  navigationOptions: {
-    headerStyle: {
-      marginTop: Expo.Constants.statusBarHeight
-    }
-  }
-});
+// const NavigationApp = StackNavigator({
+//   Home: { screen: App },
+//   Event: { screen: Event },
+//   Todo: { screen: Todo },
+// }, {
+//   navigationOptions: {
+//     headerStyle: {
+//       marginTop: Expo.Constants.statusBarHeight
+//     }
+//   }
+// });
 
 export default class App extends React.Component {
     static navigationOptions = {
