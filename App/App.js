@@ -6,7 +6,7 @@ const util = require('util');
 
 
 const NavigationApp = StackNavigator({
-  Home: { screen: Home },
+  Home: { screen: App },
   Event: { screen: Event },
   Todo: { screen: Todo },
 }, {
