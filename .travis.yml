@@ -20,6 +20,7 @@ matrix:
       - '10.7'
       before_install: 
       - npm install
+      - npm i @babel/preset-react
       script:
       - npm test
       - npm run lint

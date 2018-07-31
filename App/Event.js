@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { List, ListItem, Avatar } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
+import Todo from './App/Todo.js'
 
 export default class Event extends React.Component {
   static navigationOptions = {
@@ -54,9 +55,9 @@ export default class Event extends React.Component {
         title='Back'/>
 
         <TouchableHighlight
-            onPress={() => navigate("Profile", { screen: "Profile" })}
+            onPress={() => navigate("Todo", { screen: "Todo" })}
             style={[styles.button, {backgroundColor: '#8E84FB'}]}>
-            <Text style={styles.buttonText}>Profile</Text>
+            <Text style={styles.buttonText}>Todo</Text>
         </TouchableHighlight>
 
         <List>

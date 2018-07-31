@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.55",
+    "@babel/preset-env": "^7.0.0-beta.55",
+    "@babel/preset-react": "^7.0.0-beta.55",
+    "babel-jest": "^20.0.3",
     "eslint": "^5.2.0",
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-react-native": "^3.2.1",
     "jest": "^23.4.2",
     "jest-expo": "^28.0.0",
-    "react-native-scripts": "1.14.0",
+    "react-native-scripts": "^1.14.1",
     "react-test-renderer": "16.3.1"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
@@ -24,12 +28,19 @@
     "lint": "eslint"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   },
   "dependencies": {
+    "@babel/preset-react": "^7.0.0-beta.55",
+    "babel-jest": "^23.4.2",
+    "babel-preset-env": "^1.7.0",
     "expo": "^28.0.0",
+    "i": "^0.3.6",
     "react": "16.3.1",
-    "react-native": "~0.55.2",
+    "react-native": "^0.56.0",
     "react-native-elements": "^0.19.1",
     "react-navigation": "^2.9.3",
     "util": "^0.11.0"
