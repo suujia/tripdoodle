@@ -4,7 +4,6 @@ import { Button } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
 const util = require('util');
 
-
 // const NavigationApp = StackNavigator({
 //   Home: { screen: App },
 //   Event: { screen: Event },
