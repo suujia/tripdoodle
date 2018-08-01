@@ -5,17 +5,17 @@ import { StackNavigator } from 'react-navigation';
 const util = require('util');
 
 
-// const NavigationApp = StackNavigator({
-//   Home: { screen: App },
-//   Event: { screen: Event },
-//   Todo: { screen: Todo },
-// }, {
-//   navigationOptions: {
-//     headerStyle: {
-//       marginTop: Expo.Constants.statusBarHeight
-//     }
-//   }
-// });
+const NavigationApp = StackNavigator({
+  Home: { screen: App },
+  Event: { screen: Event },
+  Todo: { screen: Todo },
+}, {
+  navigationOptions: {
+    headerStyle: {
+      marginTop: Expo.Constants.statusBarHeight
+    }
+  }
+});
 
 export default class App extends React.Component {
     static navigationOptions = {
@@ -68,15 +68,9 @@ export default class App extends React.Component {
         <Button
         raised
         icon={{name: 'cached'}}
-        onPress={() => navigate('Event', {eventId: this.eventId, name: this.name, event_url: this.event_url, desc:this.desc})}
+        onPress={() => navigate('Event')}
+        //  {eventId: this.eventId, name: this.name, event_url: this.event_url, desc:this.desc})}
         title='Event' />
-
-        <Button
-        raised
-        color={ 'blue' }
-        icon={{name: 'cached'}}
-        onPress={() => navigate('Map')}
-        title='BUTTON TWO' />
 
         <Button
         raised
@@ -92,13 +86,13 @@ export default class App extends React.Component {
 
 // make a proper menu
 // www.codementor.io/blessingoraz/understanding-navigation-in-react-native-a3wlcxmzu
-const Menu = StackNavigator({
-  Home: { screen: App },
-  Event: { screen: Event },
-  Map: { screen: Map },
-  Profile: { screen: Profile },
+// const Menu = StackNavigator({
+//   Home: { screen: App },
+//   Event: { screen: Event },
+//   Map: { screen: Map },
+//   Profile: { screen: Profile },
 
-});
+// });
 
 const styles = StyleSheet.create({
   container: {

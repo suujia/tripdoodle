@@ -30,7 +30,7 @@ export default class Event extends React.Component {
 
         <Text>Params from home page: eventId = {params.id}, event = {params.name}, event_url = {params.event_url}, desc = {params.subtitle}</Text>
 
-        <Avatar
+        {/* <Avatar
         small
         rounded
         source={{uri: "Susie.jpg"}}
@@ -44,7 +44,7 @@ export default class Event extends React.Component {
         source={{uri: "Dylan.jpg"}}
         onPress={() => navigate('Profile', { name: 'Dylan'})}
         activeOpacity={0.7}
-        />
+        /> */}
 
         <Button
         raised
@@ -59,7 +59,13 @@ export default class Event extends React.Component {
             <Text style={styles.buttonText}>Profile</Text>
         </TouchableHighlight>
 
-        <List>
+        <Button
+        raised
+        icon={{name: 'cached'}}
+        onPress={() => navigate('Todo')}
+        title='Todo' />
+
+        {/* <List>
         {
             list.map((item, i) => (
             <ListItem
@@ -69,7 +75,7 @@ export default class Event extends React.Component {
             />
             ))
         }
-        </List>
+        </List> */}
 
         </View>
 
