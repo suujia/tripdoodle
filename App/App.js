@@ -3,15 +3,9 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
 const util = require('util');
-<<<<<<< HEAD:App/App.js
-
-
-const NavigationApp = StackNavigator({
-=======
 import Event from './App/Event.js'
 
 const ScreenStack = StackNavigator({
->>>>>>> 436f2a90010ae51e06914da3d258e69c59b5aa17:App/App.js
   Home: { screen: App },
   Event: { screen: Event },
   Todo: { screen: Todo },
