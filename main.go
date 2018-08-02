@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	// “database/sql”
+	// _ “github.com/lib/pq”
 )
 
 type Event struct {
@@ -45,6 +47,14 @@ func main() {
 
 	people := append(people, Person{Id: "1", Firstname: "Susie", Lastname: "Chen", Address: &Address{City: "Vancouver", Country: "Canada"}})
 	people = append(people, Person{Id: "2", Firstname: "Dylan", Lastname: "Whitney"})
+	// db, err := sql.Open(“postgres”,”user= dbname= sslmode=disable”)
+	// if err != nil {
+	// 	log.Fatal(“Error: The data source fields invalid”)
+	//   }
+
+	do := &todo{EnableEdit: false, Id: "123", Title: "Cultus Lake", Completed: false, Action: "ADD"}
+	http.HandleFunc("/", handle)
+	http.ListenAndServe(":8080", nil)
 }
 
 // fetch all from people slice
