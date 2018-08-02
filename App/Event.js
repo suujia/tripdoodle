@@ -3,11 +3,10 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { List, ListItem, Avatar } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
-import Todo from './App/Todo.js'
 
 export default class Event extends React.Component {
   static navigationOptions = {
-    title: 'EventScreen',
+    title: 'Event',
   };
   render() {
     const { state, navigate } = this.props.navigation;

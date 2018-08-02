@@ -84,29 +84,19 @@ export default class App extends React.Component {
         icon={{name: 'cached'}}
         onPress={() => navigate('Event')}
         //  {eventId: this.eventId, name: this.name, event_url: this.event_url, desc:this.desc})}
-        title='Event' />
+        title='Event'/>
 
         <Button
         raised
         color={ 'blue' }
         icon={{name: 'cached'}}
         onPress={() => navigate('Profile')}
-        title='Profile' />
+        title='Profile'/>
 
       </View>
     );
   }
 }
-
-// make a proper menu
-// www.codementor.io/blessingoraz/understanding-navigation-in-react-native-a3wlcxmzu
-// const Menu = StackNavigator({
-//   Home: { screen: App },
-//   Event: { screen: Event },
-//   Map: { screen: Map },
-//   Profile: { screen: Profile },
-
-// });
 
 const styles = StyleSheet.create({
   container: {
