@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
-import { Button } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
 
 export default class Todo extends React.Component {
