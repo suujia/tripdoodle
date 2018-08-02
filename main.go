@@ -5,6 +5,8 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	// “database/sql”
+	// _ “github.com/lib/pq”
 )
 
 type todo struct {
@@ -17,6 +19,11 @@ type todo struct {
 }
 
 func main() {
+	// db, err := sql.Open(“postgres”,”user= dbname= sslmode=disable”)
+	// if err != nil {
+	// 	log.Fatal(“Error: The data source fields invalid”)
+	//   }
+
 	do := &todo{EnableEdit: false, Id: "123", Title: "Cultus Lake", Completed: false, Action: "ADD"}
 	http.HandleFunc("/", handle)
 	http.ListenAndServe(":8080", nil)
