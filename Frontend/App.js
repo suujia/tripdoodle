@@ -1,13 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
-import { StackNavigator } from 'react-navigation';
-const util = require('util');
+import { createStackNavigator } from 'react-navigation';
 
-const ScreenStack = StackNavigator({
-  Home: { screen: App },
-  Event: { screen: Event },
-  Todo: { screen: Todo },
+const ScreenStack = createStackNavigator({
+  HomeScreen: { screen: App },
+  EventScreen: { screen: Event },
+  TodoScreen: { screen: Todo },
 }, {
   navigationOptions: {
     headerStyle: {
@@ -15,6 +14,7 @@ const ScreenStack = StackNavigator({
     }
   }
 });
+export default ScreenStack;
 
 // const Menu = TabNavigator({
 //   Home: { screen: ScreenStack,
@@ -48,15 +48,15 @@ export default class App extends React.Component {
         <Button
         raised
         icon={{name: 'cached'}}
-        onPress={() => navigate('Event')}
-        title='Event'/>
+        onPress={() => navigate('EventScreen')}
+        title='Go to Event'/>
 
         <Button
         raised
         color={ 'blue' }
         icon={{name: 'cached'}}
-        onPress={() => navigate('Profile')}
-        title='Profile'/>
+        onPress={() => navigate('ProfileScreen')}
+        title='Go to Profile'/>
       </View>
     );
   }

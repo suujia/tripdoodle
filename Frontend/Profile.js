@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 export default class Profile extends React.Component {
   static navigationOptions = {

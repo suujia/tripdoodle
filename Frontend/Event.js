@@ -2,11 +2,11 @@ import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { Avatar } from 'react-native-elements';
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 export default class Event extends React.Component {
   static navigationOptions = {
-    title: 'Event',
+    title: 'EventScreen',
   };
   render() {
     const { goBack, navigate } = this.props.navigation;
@@ -16,14 +16,7 @@ export default class Event extends React.Component {
         <Avatar
         small
         rounded
-        onPress={() => navigate('Profile')}
-        activeOpacity={0.7}
-        />
-
-        <Avatar
-        small
-        rounded
-        onPress={() => navigate('Profile')}
+        onPress={() => navigate('ProfileScreen')}
         activeOpacity={0.7}
         />
 
@@ -31,11 +24,11 @@ export default class Event extends React.Component {
         raised
         color={ 'blue' }
         icon={{name: 'cached'}}
-        onPress={() => goBack()}
+        onPress={() => goBack(null)}
         title='Back'/>
 
         <TouchableHighlight
-            onPress={() => navigate("Todo")}
+            onPress={() => navigate("TodoScreen")}
             style={[styles.button, {backgroundColor: '#8E84FB'}]}>
             <Text style={styles.buttonText}>Todo</Text>
         </TouchableHighlight>
