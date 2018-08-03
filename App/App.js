@@ -1,10 +1,6 @@
 import React from 'react';
-<<<<<<< HEAD:App/App.js
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
-=======
-import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
->>>>>>> 2ddf131856ce5d83a6019a6d1471767c7ccaba35:App/App.js
 import { StackNavigator } from 'react-navigation';
 const util = require('util');
 
