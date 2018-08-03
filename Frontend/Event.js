@@ -9,7 +9,7 @@ export default class Event extends React.Component {
     title: 'Event',
   };
   render() {
-    const { navigate } = this.props.navigation;
+    const { goBack, navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text>cultus lake event</Text>
