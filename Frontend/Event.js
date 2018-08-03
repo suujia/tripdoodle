@@ -9,7 +9,7 @@ export default class Event extends React.Component {
     title: 'Event',
   };
   render() {
-    const { state, navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text>cultus lake event</Text>
@@ -31,7 +31,7 @@ export default class Event extends React.Component {
         raised
         color={ 'blue' }
         icon={{name: 'cached'}}
-        onPress={() => this.props.navigation.goBack()}
+        onPress={() => goBack()}
         title='Back'/>
 
         <TouchableHighlight

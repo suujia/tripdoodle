@@ -7,14 +7,14 @@ export default class Todo extends React.Component {
     title: 'TodoScreen',
   };
   render() {
-    var { navigate } = this.props.navigation;
+    var { navigate, goBack } = this.props.navigation;
       // https://facebook.github.io/react-native/docs/using-a-listview  make a list 
     return (
       <View style={styles.container}>
         <Text>todo list</Text>
 
         <TouchableHighlight
-            onPress={() => this.props.navigation.goBack()}
+            onPress={() => goBack()}
             style={[styles.button, {backgroundColor: '#C56EE0'}]}>
             <Text style={styles.buttonText}>Go Back</Text>
         </TouchableHighlight>

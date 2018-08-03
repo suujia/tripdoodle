@@ -17,7 +17,12 @@ const ScreenStack = StackNavigator({
 });
 
 // const Menu = TabNavigator({
-//   Home: { screen: App },
+//   Home: { screen: ScreenStack,
+//     navigationOptions: {
+//       tabBarLabel: 'Home',
+//       tabBarIcon: ({ tintColor }) => <Icon name="list" size={35} color={tintColor} />
+//     },
+//  },
 //   Map: { screen: Map },
 //   Profile: { screen: Profile }
 // }, {
@@ -34,8 +39,9 @@ export default class App extends React.Component {
     static navigationOptions = {
     title: 'HomeScreen',
   };
-  
+
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text>welcome to tripdoodle</Text>

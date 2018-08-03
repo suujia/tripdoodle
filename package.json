@@ -33,7 +33,7 @@
     }
   },
   "dependencies": {
-    "eslint": "^5.20.0",
+    "eslint": "^5.2.0",
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-react-native": "^3.2.1",
     "expo": "^27.0.1",
