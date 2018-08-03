@@ -32,24 +32,14 @@ type Person struct {
 	Location  string `json:"city"`
 }
 
-// $ export DBHOST=localhost
-// $ export DBPORT=5432
 // $ export DBUSER=you
-// $ export DBPASS=pass
 // $ export DBNAME=dbname
-
 func main() {
 	db, err := sql.Open(“postgres”,”user="DBUSER" dbname="DBNAME" sslmode=disable”)
 	if err != nil {
 		log.Fatal(err)
 	  }
 	defer db.Close()
-
-	events := append(events, Event{Id: "122", Title: "Las Vegas", Completed: true})
-	events = append(events, Event{Id: "123", Title: "Cultus Lake", Completed: false})
-
-	people := append(people, Person{Id: "1", Firstname: "Susie", Lastname: "Chen", Location: "Vancouver"}})
-	people = append(people, Person{Id: "2", Firstname: "Dylan", Lastname: "Whitney"})
 
 	http.HandleFunc("/", handle)
 	log.Println("Starting server on :8080..")
