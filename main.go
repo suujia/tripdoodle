@@ -5,9 +5,13 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	// “database/sql”
-	// _ “github.com/lib/pq”
+	"database/sql"
+	_ "github.com/lib/pq"
 )
+
+type server struct {
+	db *sql.DB
+}
 
 type Event struct {
 	Id        string `json:"id"`
@@ -25,82 +29,82 @@ type Person struct {
 	Id        string   `json:"id"`
 	Firstname string   `json:"firstname"`
 	Lastname  string   `json:"lastname"`
-	Address   *Address `json:"address, omitempty"`
+	Location  string `json:"city"`
 }
 
-type Address struct {
-	City    string `json:"city, omitempty"`
-	Country string `json:"country, omitempty"`
-}
-
-var people []Person
-var events []Event
-var eventId int
+// $ export DBHOST=localhost
+// $ export DBPORT=5432
+// $ export DBUSER=you
+// $ export DBPASS=pass
+// $ export DBNAME=dbname
 
 func main() {
-	http.HandleFunc("/", GetPeople)
-	http.HandleFunc("/{id}", handle)
-	log.Fatal(http.ListenAndServe(":8000", nil))
+	db, err := sql.Open(“postgres”,”user="DBUSER" dbname="DBNAME" sslmode=disable”)
+	if err != nil {
+		log.Fatal(err)
+	  }
+	defer db.Close()
 
 	events := append(events, Event{Id: "122", Title: "Las Vegas", Completed: true})
 	events = append(events, Event{Id: "123", Title: "Cultus Lake", Completed: false})
 
-	people := append(people, Person{Id: "1", Firstname: "Susie", Lastname: "Chen", Address: &Address{City: "Vancouver", Country: "Canada"}})
+	people := append(people, Person{Id: "1", Firstname: "Susie", Lastname: "Chen", Location: "Vancouver"}})
 	people = append(people, Person{Id: "2", Firstname: "Dylan", Lastname: "Whitney"})
-	// db, err := sql.Open(“postgres”,”user= dbname= sslmode=disable”)
-	// if err != nil {
-	// 	log.Fatal(“Error: The data source fields invalid”)
-	//   }
 
-	do := &todo{EnableEdit: false, Id: "123", Title: "Cultus Lake", Completed: false, Action: "ADD"}
 	http.HandleFunc("/", handle)
-	http.ListenAndServe(":8080", nil)
-}
-
-// fetch all from people slice
-func GetPeople(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(people)
-
+	log.Println("Starting server on :8080..")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 func handle(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
-	// display one person's data
 	case "GET":
-		for _, ev := range people {
-			if ev.Id == r.FormValue("Id") {
-				json.NewEncoder(w).Encode(ev)
-				w.WriteHeader(http.StatusOK)
-				return
+		eventid := r.FormValue("Id")
+		rows, err := db.Query(`
+			SELECT
+				id,
+				title,
+				completed
+			FROM Event
+			WHERE id=$eventid`)
+		if err != nil {
+				panic(err)
+		}
+		defer rows.Close()
+		for rows.Next(){
+			event := Event{}
+			err = rows.Scan(&event.id, &event.title, &event.completed)
+			if err != nil {
+				panic(err)
 			}
 		}
-
-	case "ADD":
-		var event Event
-
-		event.Id = r.FormValue("Id")
-		event.Title = r.FormValue("Title")
-		event.Completed = false
-		events = append(events, event)
-
-		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte(events))
+		fmt.Println(event)
+		w.Write(event)
 		w.WriteHeader(http.StatusOK)
+
+	case "PUT":
+		// // add entry into events, retrieve last inserted id and increment it 
+		// err = db.QueryRow("INSERT INTO Event VALUES ('') RETURNING eid).Scan(&eid)
+		// if err != nil {
+		// 	panic(err)
+		// }
+
+		// fmt.Println(lastInsertId)
+		// title := r.FormValue("Title")
+		// err = db.QueryRow("INSERT INTO Event lastInsertId+1, title, false").Scan(&lastInsertId)
+		// if err != nil {
+		// 	panic(err)
+		// }
+		fmt.Println("you have added this event!")
+
 
 	case "DELETE":
-		for index, ev := range events {
-			if ev.Id == r.FormValue("Id") {
-				people = append(people[:index], people[index+1:]...)
-				break
-			}
-			w.WriteHeader(http.StatusOK)
-			fmt.Println("you're deleting this todo")
-		}
+		fmt.Println("you have deleted this event!")
 
 	case "PATCH":
-		// complete todos, change title
+		// complete todos, change info
 		w.WriteHeader(http.StatusOK)
-		fmt.Println("you're editing this todo!")
+		fmt.Println("you're editing this event!")
 
 	default:
 		w.WriteHeader(http.StatusInternalServerError)

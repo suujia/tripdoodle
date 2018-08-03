@@ -1,24 +1,38 @@
-CREATE TABLE Event
+Create Database "tripdoodle";
+
+CREATE TABLE "Event"
 (
-    id SERIAL,
+    eid SERIAL,
     title TEXT NOT NULL,
     completed BOOLEAN NOT NULL DEFAULT false,
-    CONSTRAINT Person.id PRIMARY KEY (id)
-)
+    CONSTRAINT Person.id PRIMARY KEY (eid)
+);
 
-CREATE TABLE Todo
+CREATE TABLE "Todo"
 (
-    id SERIAL,
+    tid SERIAL,
     title TEXT NOT NULL,
     completed BOOLEAN NOT NULL DEFAULT false,
-    CONSTRAINT Event.id PRIMARY KEY (id)
-)
+    CONSTRAINT Event.eid PRIMARY KEY (tid) 
+    FOREIGN KEY (Event.eid) REFERENCES Event
+);
 
-CREATE TABLE Person
+CREATE TABLE "Person"
 (
-    id SERIAL,
+    pid SERIAL,
     firstname TEXT NOT NULL,
     lastname TEXT NOT NULL,
     city TEXT,
-    PRIMARY KEY (id)
-)
+    PRIMARY KEY (pid)
+);
+
+
+insert into Event
+values(1, 'Las Vegas', 'May 5-8, 2018', false)
+
+insert into Event
+values(2, 'Salt Spring Island', 'June 27-29, 2018', false)
+
+insert into Event
+values(3, 'Cultus Lake', 'Aug 17-19, 2018', false)
+
