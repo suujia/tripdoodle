@@ -8,23 +8,6 @@ export default class App extends React.Component {
     title: 'Welcome',
   };
   render() {
-    const list = [
-      {
-        name: 'Las Vegas',
-        event_url: 'vegas.jpg',
-        subtitle: 'May 5-9, 2018'
-      },
-      {
-        name: 'Salt Spring Island',
-        event_url: 'saltspring.jpg',
-        subtitle: 'June 27-29, 2018'
-      },
-      {
-        name: 'Cultus Lake',
-        event_url: 'cultus.jpg',
-        subtitle: 'Aug 17-19, 2018'
-      },
-    ];
 
     return (
       <View style={styles.container}>
