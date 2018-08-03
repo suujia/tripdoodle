@@ -70,3 +70,4 @@ matrix:
 
 notifications:
   email: false
+  
