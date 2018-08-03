@@ -5,7 +5,7 @@ import { createStackNavigator } from 'react-navigation';
 
 const ScreenStack = createStackNavigator({
   HomeScreen: { screen: App },
-  EventScreen: { screen: Event },
+  TripScreen: { screen: Trip },
   TodoScreen: { screen: Todo },
 }, {
   navigationOptions: {
@@ -48,8 +48,8 @@ export default class App extends React.Component {
         <Button
         raised
         icon={{name: 'cached'}}
-        onPress={() => navigate('EventScreen')}
-        title='Go to Event'/>
+        onPress={() => navigate('TripScreen')}
+        title='Go to Trip'/>
 
         <Button
         raised

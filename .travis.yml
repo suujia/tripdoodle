@@ -20,10 +20,11 @@ matrix:
       - '10.7'
       before_install: 
       - npm install
+      - eslint --init
       script:
       - npm test
       - npm run lint
-      - npn run coverage
+      - npm run coverage
       # env:
       # - NODE_ENV: feature/travis
     

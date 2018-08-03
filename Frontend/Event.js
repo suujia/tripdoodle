@@ -1,24 +1,16 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-import { Avatar } from 'react-native-elements';
-import { createStackNavigator } from 'react-navigation';
 
-export default class Event extends React.Component {
+export default class Trip extends React.Component {
   static navigationOptions = {
-    title: 'EventScreen',
+    title: 'TripScreen',
   };
   render() {
     const { goBack, navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text>cultus lake event</Text>
-        <Avatar
-        small
-        rounded
-        onPress={() => navigate('ProfileScreen')}
-        activeOpacity={0.7}
-        />
+        <Text>cultus lake trip</Text>
 
         <Button
         raised
